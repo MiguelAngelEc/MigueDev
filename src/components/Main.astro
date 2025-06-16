@@ -6,21 +6,20 @@ import instagram from "../assets/instagram.svg"
 ---
 
 <main class="flex flex-col w-full h-auto min-h-[625px] px-4 py-4">
-  <div class="flex flex-col lg:flex-row items-center justify-center gap-6 h-auto w-full text-center lg:text-right">
-    
+  <section class="flex flex-col lg:flex-row items-center justify-center gap-6 h-auto w-full text-center lg:text-right">
     <!-- Contenedor de texto -->
     <div class="flex flex-col w-full lg:max-w-3xl lg:w-[50vw] mb-6 lg:mb-0">
-      <h1 class="text-[12vw] sm:text-[10vw] lg:text-[8.5vw] font-bold text-black">
+      <h1 class="text-[12vw] sm:text-[7vw] lg:text-[8vw] font-bold text-black">
         <span class="char">MIGUE.</span><span class="text-transparent custom-stroke">dev</span>
       </h1>
       <h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold mt-2">
         Coding with character.
       </h2>
-      <p class="mt-2 text-base lg:text-[16px] sm:text-lg">
+      <p class="mt-2 text-base lg:text-[15px] sm:text-[12px]">
         Self-taught developer focused on <span class="font-bold">frontend</span> magic, 
         <span class="font-bold">backend</span> logic and bringing ideas to life.
       </p>
-      <span class="flex justify-center sm:justify-end gap-3 sm:gap-4 mt-4 sm:mt-6 lg:mt-6 social-media">
+      <div class="flex justify-center sm:justify-end gap-3 sm:gap-4 mt-4 sm:mt-6 lg:mt-6">
         <a class="rotate inline-block will-change-transform" href="https://github.com/MiguelAngelEc">
           <img class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 hover:scale-110 transition-all duration-300 inline-block will-change-transform" src={github.src} alt="">
         </a>
@@ -30,7 +29,10 @@ import instagram from "../assets/instagram.svg"
         <a class="rotate inline-block will-change-transform" href="https://www.instagram.com/migueangel.dev/">
           <img class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 hover:scale-110 transition-all duration-300 inline-block will-change-transform" src={instagram.src} alt="">
         </a>
-      </span>
+      </div>
+      <div class="flex justify-center sm:justify-end gap-3 sm:gap-4 mt-4 sm:mt-6 lg:mt-6 curriculum">
+        <button class="bg-black text-white px-4 py-2 rounded-full hover:scale-110 transition-all duration-300 inline-block will-change-transform">Download CV</button>
+      </div>
     </div>
 
     <!-- Contenedor de imagen -->
@@ -38,7 +40,7 @@ import instagram from "../assets/instagram.svg"
       <img class="w-full h-auto" src={img.src} alt="Dev-person">
     </div>
 
-  </div>
+  </section>
 </main>
 
 <script>
@@ -60,5 +62,14 @@ import instagram from "../assets/instagram.svg"
       .custom-stroke {
         -webkit-text-stroke: 1px black;
       }
+    }
+
+    /* Button CV */
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 39%;
+      transform: translateX(-50%);
+      z-index: 9999;
     }
 </style>

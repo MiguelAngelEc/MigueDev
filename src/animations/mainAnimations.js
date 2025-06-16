@@ -3,17 +3,25 @@ import { gsap, ScrollTrigger, SplitText } from './gsap-config.js';
 
 export function initMainAnimations() {
 
+  //const of text
   const h1Element = document.querySelector('h1')
   const h2Element = document.querySelector('h2')
   const pElement = document.querySelector('p')
   const spanElement = document.querySelector('.char')
-  const imgElement = document.querySelectorAll('.rotate img');
-  const divElement = document.querySelector('.dev-img img')
-  const mainElement = document.querySelector('main');
+  //const of splitText
   const split1 = new SplitText(spanElement, { type: "chars" });
   const split2 = new SplitText(h2Element, { type: "chars" });
+  //const of social media
+  const imgElement = document.querySelectorAll('.rotate img');
+  //const of dev-img
+  const divElement = document.querySelector('.dev-img img')
+  //const of main
+  const mainElement = document.querySelector('main');
+  //cost of CV
+  const cvSticky = document.querySelector(".curriculum button");
+  
 
-  //Animacion de texto sin scroll
+  //Animation of text without scroll
   gsap.from(split1.chars, {
     duration: 0.8,
     x: -100,
@@ -30,7 +38,7 @@ export function initMainAnimations() {
     ease: 'power2.out',
   });
 
-  //Animacion de texto con scroll
+  //Animation of text with scroll
   gsap.to([h1Element, h2Element, pElement], {
     opacity: 0,
     y: -50,
@@ -43,7 +51,7 @@ export function initMainAnimations() {
     }
   });
 
-  //Animacion de Dev-img 
+  //Animation of Dev-img 
   gsap.to ([divElement],{
     opacity: 0,
     x: 30, // Reducir el desplazamiento
@@ -52,13 +60,13 @@ export function initMainAnimations() {
     scrollTrigger: {
       trigger: mainElement,
       start: "top top",
-      end: "+=200",
+      end: "+=400",
       scrub: true,
       toggleActions: "play none none none"
     }
   })
 
-  //Animacion de Inconos de redes Sociales
+  //Animation of social media icons
   imgElement.forEach((img, i) => {
     // Configurar el estado inicial
     gsap.set(img, {
@@ -71,22 +79,45 @@ export function initMainAnimations() {
     gsap.to(img, {
       opacity: 0,
       x: -100,
-      rotation: 360,
-      ease: "power1.out",
+      rotation: -360,
+      ease: "power2.out",
       transformOrigin: "center center",
       scrollTrigger: {
         trigger: mainElement, // Usar el elemento principal como disparador
-        start: "top top",    // Comenzar cuando el top del viewport toque el top del trigger
-        end: "+=250",         // Terminar después de 500px de scroll
+        start: "top",    // Comenzar cuando el top del viewport toque el top del trigger
+        end: "+=100",         // Terminar después de 500px de scroll
         scrub: true,
         toggleActions: "play none none none" // Solo reproducir en scroll hacia abajo
       }
     });
+  });
+
+  //Animation of Button CV
+  gsap.to(cvSticky, {
+    x: 100,
+    scrollTrigger: {
+      trigger: mainElement,
+      start: "top top", // empieza antes de que top llegue a top
+      end: "+=100",       // termina cuando top top se alinea
+      scrub: true
+    }
+  });
+
+  ScrollTrigger.create({
+    trigger: mainElement,
+    start: "+=550",
+    end: "+=9999",
+    onEnter: () => {
+      cvSticky.classList.add("fixed");
+    },
+    onLeaveBack: () => {
+      cvSticky.classList.remove("fixed");
+    }
   });
 }
 
 // Limpieza
 export function cleanupAnimations() {
   ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  SplitText.revert();
+  SplitText.getAll().forEach(trigger => trigger.kill());
 }
