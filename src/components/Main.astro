@@ -8,7 +8,7 @@ import instagram from "../assets/instagram.svg"
 <main class="flex flex-col w-full h-auto min-h-[625px] px-4 py-4">
   <section class="flex flex-col lg:flex-row items-center justify-center gap-6 h-auto w-full text-center lg:text-right">
     <!-- Contenedor de texto -->
-    <div class="flex flex-col w-full lg:max-w-3xl lg:w-[50vw] mb-6 lg:mb-0">
+    <div class="flex flex-col w-full lg:max-w-3xl lg:w-[50vw] lg:mb-0">
       <h1 class="text-[12vw] sm:text-[7vw] lg:text-[8vw] font-bold text-black">
         <span class="char">MIGUE.</span><span class="text-transparent custom-stroke">dev</span>
       </h1>
@@ -51,25 +51,3 @@ import instagram from "../assets/instagram.svg"
     initMainAnimations();
   });
 </script>
-
-<style>
-    .custom-stroke {
-      -webkit-text-stroke: 3px black; /* Estilo por defecto (desktop) */
-    }
-
-    /* Tablet y móviles (hasta 1024px) */
-    @media (max-width: 1024px) {
-      .custom-stroke {
-        -webkit-text-stroke: 1px black;
-      }
-    }
-
-    /* Button CV */
-    .fixed {
-      position: fixed;
-      top: 0;
-      left: 39%;
-      transform: translateX(-50%);
-      z-index: 9999;
-    }
-</style>

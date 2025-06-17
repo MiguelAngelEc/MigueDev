@@ -1,6 +1,6 @@
----                               
-import './src/styles/global.css'  
----    
+---
+import "./src/styles/global.css";
+---
 
 <!doctype html>
 <html lang="es">
@@ -10,9 +10,27 @@ import './src/styles/global.css'
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<link rel="stylesheet" href="/src/styles/style.css" />
 	</head>
-	<body class="h-[2200px]">
+	<body class="h-[1400px]">
 		<slot />
+		<script is:inline>
+			// Script de scroll suave
+			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+				anchor.addEventListener("click", (e) => {
+					e.preventDefault();
+					const targetId = anchor.getAttribute("href");
+					if (targetId === "#") return;
+
+					const targetElement = document.querySelector(targetId);
+					if (targetElement) {
+						targetElement.scrollIntoView({
+							behavior: "smooth",
+							block: "start",
+						});
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
-
