@@ -4,13 +4,14 @@ import gmail from "../assets/gmail.svg"
 import platzi from "../assets/platzi.avif"
 import stanford from "../assets/Stanford_University.png"
 import ucl from "../assets/ucl.jpeg"
+import certificado from "../assets/certificado_stanford.png"
 import { getFirstThreeCertificates } from "../utils/putCertificados.js";
 const firstThreeCerts = getFirstThreeCertificates();
 ---
 <section id="about" class="flex flex-col lg:flex-row items-center justify-center gap-16 h-auto w-full text-center lg:text-right">
-    <div class="flex flex-col w-full lg:max-w-3xl lg:w-[50vw] mb-6 p-8 lg:mb-0">
+    <div class="flex flex-col w-full lg:max-w-3xl lg:w-[50vw] mb-6 p-8 lg:mb-0 h-[100vh]">
         <div class="about-text-title">
-            <h2 class="text-[12vw] sm:text-[7vw] lg:text-[2vw] ml-7 font-bold text-black text-left">Who is Miguel Angel Castillo? 
+            <h2 class="text-[12vw] sm:text-[7vw] lg:text-[2vw] ml-11 font-bold text-black text-left">Who is Miguel Angel Castillo? 
             <span>MIGUE.</span><span class="text-transparent custom-stroke2">dev</span></h2>
         </div> 
         <div>
@@ -21,7 +22,7 @@ const firstThreeCerts = getFirstThreeCertificates();
             <a class="about-text-a flex items-center gap-2 ml-11 mt-2" href="https://web.whatsapp.com"><img class="w-5 h-5" src={gmail.src} alt="">filia.castillo@gmail.com</a>
         </div>
     </div>
-    <div class="w-[50vw] sm:w-2/3 lg:w-[50vw] lg:ml-10 dev-img border-left border-black">
+    <div class="w-[50vw] sm:w-2/3 lg:w-[50vw] lg:ml-10 dev-img border-left border-black h-[100vh] container-study">
         <h3 class="text-[12vw] sm:text-[7vw] lg:text-[2vw] text-left font-bold mt-6">Studys</h3>
         <div>
             <div class="flex items-center gap-2  mt-2">
@@ -55,6 +56,9 @@ const firstThreeCerts = getFirstThreeCertificates();
                 <h4 class="text-xl text-left font-bold">Stanford University-Cursos</h4>
             </div>
             <li class="text-xl text-left mt-2">Python</li>
+            <div class="w-[5vw] h-12 gap-2 mt-4">
+                <img class="w-25 h-25 hover:scale-110 transition-all duration-300 inline-block will-change-transform" src={certificado.src} alt="">
+            </div>
         </div>
     </div>
 </section>
