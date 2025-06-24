@@ -1,0 +1,56 @@
+---
+import { getCertificates } from "../utils/putCertificados";
+import { toggleDisplay } from "../utils/display";
+const availableCertificates = await getCertificates();
+---
+
+<main class="flex flex-col w-full h-auto min-h-[625px] px-4 py-4">
+  <div
+    class="flex justify-center items-center text-[12vw] sm:text-[7vw] lg:text-[8vw] font-bold text-black"
+  >
+    Certificates aproved
+  </div>
+  <section class="flex justify-start items-center">
+    <div
+      id="display-on"
+      class="grid grid-cols-2 gap-4 m-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 justify-start items-center"
+    >
+      <a
+        href="#"
+        class="flex flex-col items-center gap-2 hover:scale-110 transition-all duration-300 will-change-transform"
+      >
+        <img class="w-10 h-10" src="/src/assets/logo-certif.png" alt="" />
+        <h2 class="text-xl font-bold">English</h2>
+      </a>
+    </div>
+  </section>
+  <section id="display" class="flex justify-center items-center">
+    <div
+      class="grid grid-cols-3 gap-4 m-4 h-[100vh] lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 justify-center items-center"
+    >
+      {
+        availableCertificates.map((certUrl, index) => (
+          <img
+            class="w-50 h-50 hover:scale-105 transition-all duration-500 inline-block will-change-transform"
+            src={certUrl}
+            alt={`Certificado ${index + 1}`}
+            loading="lazy"
+          />
+        ))
+      }
+    </div>
+  </section>
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const displayOn = document.getElementById("display-on");
+    const display = document.getElementById("display");
+
+    if (displayOn && display) {
+      displayOn.addEventListener("click", () => {
+        display.classList.toggle("display-visible");
+      });
+    }
+  });
+</script>
