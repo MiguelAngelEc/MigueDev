@@ -8,68 +8,72 @@ import certificado from "../assets/certificado_stanford.png"
 import { getCertificates } from "../utils/putCertificados";
 const availableCertificates = await getCertificates();
 ---
-<section id="about" class="flex flex-col lg:flex-row items-center justify-center gap-16 h-auto w-full text-center lg:text-right">
-    <div class="flex flex-col w-full lg:max-w-3xl lg:w-[50vw] mb-6 p-8 lg:mb-0 h-[100vh]">
-        <div class="about-text-title">
-            <h2 class="text-[12vw] sm:text-[7vw] lg:text-[2vw] ml-11 font-bold text-black text-left">Who is Miguel Angel Castillo? 
-            <span>MIGUE.</span><span class="text-transparent custom-stroke2">dev</span></h2>
-        </div> 
-        <div>
-            <p class="text-base lg:text-[15px] sm:text-[12px] text-justify ml-11 mt-4 w-[30vw] text-p">I am someone who enjoys learning and finding solutions to all kinds of problems. I’m Ecuadorian, born in a wonderful place called Mira, located in the Carchi canton. As a person, I consider myself responsible, dedicated, and above all, respectful.
-            I work hard and am always looking for solutions that create positive outcomes. I’m driven by continuous growth and a strong commitment to everything I undertake.</p>
-            <h3 class="text-xl text-left font-bold ml-11 mt-6">Contactos:</h3>
-            <a class="about-text-a flex items-center gap-2 ml-11 mt-2" href="https://web.whatsapp.com"><img class="w-5 h-5" src={whatsapp.src} alt="">+593 99 511 0920</a>
-            <a class="about-text-a flex items-center gap-2 ml-11 mt-2" href="https://web.whatsapp.com"><img class="w-5 h-5" src={gmail.src} alt="">filia.castillo@gmail.com</a>
-        </div>
+<section id="about" class="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 w-full px-4 py-8 text-center lg:text-right">
+  <div class="flex flex-col w-full max-w-2xl lg:max-w-3xl lg:w-1/2 mb-2 p-4 sm:p-8 lg:mb-0 h-auto lg:h-[80vh]">
+    <div class="about-text-title">
+      <h2 class="text-3xl sm:text-4xl lg:text-[2vw] ml-0 sm:ml-6 lg:ml-11 font-bold text-black text-left">
+        Who is Miguel Angel Castillo?
+        <span>MIGUE.</span><span class="text-transparent custom-stroke2">dev</span>
+      </h2>
     </div>
-    <div class="w-[50vw] sm:w-2/3 lg:w-[50vw] lg:ml-10 dev-img border-left border-black h-[100vh] container-study">
-        <h3 class="text-[12vw] sm:text-[7vw] lg:text-[2vw] text-left font-bold mt-6">Studys</h3>
-        <div>
-            <div class="flex items-center gap-2  mt-2">
-                <img class="w-5 h-5" src={ucl.src} alt="UCL">
-                <h4 class="text-xl text-left font-bold">University Cristiana Latinoamericana</h4>
-            </div>
-            <li class="text-xl text-left mt-2">Psicology</li>
-        </div>
-        <div>
-            <div class="flex items-center gap-2 mt-2">
-                <img class="w-5 h-5" src={platzi.src} alt="Platzi">
-                <h4 class="text-xl text-left font-bold">Platzi</h4>
-            </div>
-            <li class="text-xl text-left mt-2">Developer</li>
-            {availableCertificates.length > 0 ? (
-                <div class="grid grid-cols-3 w-full max-w-xs gap-2 m-4">
-                  {availableCertificates.slice(0, 3).map((certUrl, index) => (
-                      <img 
-                        class="w-full h-full aspect-square object-cover rounded hover:scale-110 transition-all duration-300 will-change-transform" 
-                        src={certUrl} 
-                        alt={`Certificado ${index + 1}`}
-                        loading="lazy"
-                        width="80"
-                        height="80"
-                      />
-                  ))}
-                </div>
-              ) : (
-                <p class="text-gray-500 mt-4">Cargando certificados...</p>
-              )}
-            <div class="flex justify-start"> 
-                <a href="/cetificate">
-                <button class="bg-black text-white text-[12px] px-4 py-2 rounded-full hover:scale-110 transition-all duration-300 inline-block will-change-transform">Ver más</button>
-                </a>
-            </div>
-        </div>
-        <div>
-            <div class="flex items-center gap-2 mt-2">
-                <img class="w-5 h-5" src={stanford.src} alt="Stanford">
-                <h4 class="text-xl text-left font-bold">Stanford University-Cursos</h4>
-            </div>
-            <li class="text-xl text-left mt-2">Python</li>
-            <div class="w-[5vw] h-12 gap-2 mt-4">
-                <img class="w-25 h-25 hover:scale-110 transition-all duration-300 inline-block will-change-transform" src={certificado.src} alt="Certificado Python">
-            </div>
-        </div>
+    <div>
+      <p class="text-base sm:text-[15px] text-justify sm:ml-6 lg:ml-11 mt-4 w-full sm:w-[90%] lg:w-[30vw] text-p">
+        I am someone who enjoys learning and finding solutions to all kinds of problems. I’m Ecuadorian, born in a wonderful place called Mira, located in the Carchi canton. As a person, I consider myself responsible, dedicated, and above all, respectful.
+        I work hard and am always looking for solutions that create positive outcomes. I’m driven by continuous growth and a strong commitment to everything I undertake.
+      </p>
+      <h3 class="text-xl text-left font-bold sm:ml-6 lg:ml-11 mt-6">Contactos:</h3>
+      <a class="about-text-a flex items-center gap-2 sm:ml-6 lg:ml-11 mt-2" href="https://web.whatsapp.com"><img class="w-5 h-5" src={whatsapp.src} alt="">+593 99 511 0920</a>
+      <a class="about-text-a flex items-center gap-2 sm:ml-6 lg:ml-11 mt-2" href="https://web.whatsapp.com"><img class="w-5 h-5" src={gmail.src} alt="">filia.castillo@gmail.com</a>
     </div>
+  </div>
+  <div class="w-full sm:w-2/3 lg:w-1/2 lg:ml-10 dev-img border-t lg:border-t-0 lg:border-l border-black h-auto lg:h-[80vh] container-study p-4 sm:p-8">
+    <h3 class="text-3xl sm:text-4xl lg:text-[2vw] text-left font-bold mt-6">Studys</h3>
+    <div>
+      <div class="flex items-center gap-2 mt-2">
+        <img class="w-5 h-5" src={ucl.src} alt="UCL">
+        <h4 class="text-xl text-left font-bold">University Cristiana Latinoamericana</h4>
+      </div>
+      <li class="text-xl text-left mt-2">Psicology</li>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 mt-2">
+        <img class="w-5 h-5" src={platzi.src} alt="Platzi">
+        <h4 class="text-xl text-left font-bold">Platzi</h4>
+      </div>
+      <li class="text-xl text-left mt-2">Developer</li>
+      {availableCertificates.length > 0 ? (
+        <div class="grid grid-cols-2 sm:grid-cols-3 w-full max-w-xs gap-2 m-4">
+          {availableCertificates.slice(0, 3).map((certUrl, index) => (
+            <img
+              class="w-full h-full aspect-square object-cover rounded hover:scale-110 transition-all duration-300 will-change-transform"
+              src={certUrl}
+              alt={`Certificado ${index + 1}`}
+              loading="lazy"
+              width="80"
+              height="80"
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="text-gray-500 mt-4">Cargando certificados...</p>
+      )}
+      <div class="flex justify-start">
+        <a href="/cetificate">
+          <button class="bg-black text-white text-[12px] px-4 py-2 rounded-full hover:scale-110 transition-all duration-300 inline-block will-change-transform">Ver más</button>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 mt-2">
+        <img class="w-5 h-5" src={stanford.src} alt="Stanford">
+        <h4 class="text-xl text-left font-bold">Stanford University-Cursos</h4>
+      </div>
+      <li class="text-xl text-left mt-2">Python</li>
+      <div class="w-24 h-24 gap-2 mt-4">
+        <img class="w-full h-full object-cover rounded hover:scale-110 transition-all duration-300 inline-block will-change-transform" src={certificado.src} alt="Certificado Python">
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
