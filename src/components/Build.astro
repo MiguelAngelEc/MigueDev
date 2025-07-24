@@ -1,0 +1,34 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import github from '../assets/github.svg';
+import img1 from '../assets/dev.png';
+import img2 from '../assets/logo-main.svg';
+import img3 from '../assets/logo-certif.png';
+---
+
+<section class="w-full py-8 px-4">
+  <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900">Proyectos destacados</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <ProjectCard
+      image={img1.src}
+      name="Portfolio Web"
+      description="Sitio personal para mostrar mis proyectos y habilidades."
+      urlGit="https://github.com/usuario/portfolio"
+      urlDemo="https://portfolio-demo.com"
+    />
+    <ProjectCard
+      image={img2.src}
+      name="App de Tareas"
+      description="Aplicación para gestionar tareas diarias con autenticación."
+      urlGit="https://github.com/usuario/todo-app"
+      urlDemo="https://todo-demo.com"
+    />
+    <ProjectCard
+      image={img3.src}
+      name="Galería de Certificados"
+      description="Galería interactiva para mostrar certificados obtenidos."
+      urlGit="https://github.com/usuario/certificados"
+      urlDemo="https://certificados-demo.com"
+    />
+  </div>
+</section>
