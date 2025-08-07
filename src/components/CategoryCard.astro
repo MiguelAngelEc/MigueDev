@@ -1,0 +1,74 @@
+---
+import { getCategoryIcon } from '../utils/categoryIcons.js';
+
+interface Props {
+  id: string;
+  name: string;
+  logo?: string;
+  isActive?: boolean;
+  onClick?: string;
+}
+
+const { id, name, logo, isActive = false, onClick } = Astro.props;
+const categoryIcon = getCategoryIcon(id) as { svg: string; color: string };
+---
+
+<button
+  id={`category-${id}`}
+  class="flex flex-col items-center gap-2 p-4 rounded-lg transition-all duration-300 will-change-transform hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+  data-category={id}
+  aria-label={`Ver certificados de ${name}`}
+  aria-pressed={isActive}
+>
+  <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+    {logo ? (
+      <img 
+        class="w-full h-full object-contain" 
+        src={logo} 
+        alt={`Logo de ${name}`}
+        loading="lazy"
+      />
+    ) : (
+      <div class={`w-full h-full ${categoryIcon.color}`} set:html={categoryIcon.svg} />
+    )}
+  </div>
+  <h2 class="text-sm md:text-lg font-bold text-gray-900 dark:text-white text-center">
+    {name}
+  </h2>
+</button>
+
+<script>
+  // Script para manejar la interactividad de las tarjetas
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryCards = document.querySelectorAll('[data-category]');
+    
+    categoryCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const categoryId = card.getAttribute('data-category');
+        
+        // Remover clase activa de todas las tarjetas
+        categoryCards.forEach(c => {
+          c.classList.remove('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
+          c.setAttribute('aria-pressed', 'false');
+        });
+        
+        // Agregar clase activa a la tarjeta seleccionada
+        card.classList.add('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
+        card.setAttribute('aria-pressed', 'true');
+        
+        // Disparar evento personalizado para el componente padre
+        const event = new CustomEvent('categorySelected', {
+          detail: { categoryId }
+        });
+        document.dispatchEvent(event);
+      });
+    });
+
+    // Activar la primera categoría por defecto (English)
+    const firstCard = document.querySelector('[data-category="english"]');
+    if (firstCard) {
+      firstCard.classList.add('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
+      firstCard.setAttribute('aria-pressed', 'true');
+    }
+  });
+</script> 
