@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import { resolve } from 'path';
 
 // Configuración completa para Astro + Tailwind + GitHub Pages
 export default defineConfig({
@@ -24,17 +25,11 @@ export default defineConfig({
 
   // Configuración para rutas y assets
   vite: {
-    server: {
-      // Permite hot reload en localhost
-      watch: {
-        usePolling: true,
-      },
-    },
     // Alias de carpetas si necesitas
     resolve: {
       alias: {
-        '@components': '/src/components',
-        '@assets': '/src/assets',
+        '@components': resolve('./src/components'),
+        '@assets': resolve('./src/assets'),
       },
     },
   },
