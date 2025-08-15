@@ -3,6 +3,7 @@ import img from "../assets/dev.png"
 import github from "../assets/github.svg"
 import x from "../assets/x.svg"
 import instagram from "../assets/instagram.svg"
+import { initMainAnimations } from '../animations/mainAnimations';
 ---
 
 <main class="flex flex-col w-full h-auto min-h-[625px] px-4 py-4">
@@ -42,11 +43,9 @@ import instagram from "../assets/instagram.svg"
 
   </section>
 </main>
-<script type="module">
-  import { initMainAnimations } from '../animations/mainAnimations.js';
-  
-  // Ejecutar cuando el DOM esté listo
-  window.addEventListener('load', () => {
-    initMainAnimations();
-  });
+
+<script define:vars={{ initMainAnimations }}>
+  window.addEventListener('load', initMainAnimations);
 </script>
+
+

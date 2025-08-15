@@ -1,7 +1,10 @@
-// src/scripts/mainAnimations.js
-import { gsap, ScrollTrigger, SplitText } from './gsap-config.js';
+
+// Importar GSAP desde el archivo de configuración centralizado
+import { gsap, ScrollTrigger, SplitText } from './gsap-config';
 
 export function initMainAnimations() {
+  // Verificar que estamos en el navegador
+  if (typeof window === 'undefined') return;
 
   //const of text
   const h1Element = document.querySelector('h1')
