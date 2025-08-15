@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel/serverless';
 
-// Configuración para GitHub Pages
+// Configuración para Vercel
 export default defineConfig({
-  output: 'static',
-  integrations: [tailwind()],
+  output: 'server',
+  integrations: [tailwind(), vercel()],
 });
