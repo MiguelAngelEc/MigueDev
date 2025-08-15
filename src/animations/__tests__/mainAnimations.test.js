@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-
+//Unite text
 describe('mainAnimations', () => {
   it('should import the module without errors', async () => {
     // Test básico: verificar que el módulo se puede importar
