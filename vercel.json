@@ -1,4 +1,16 @@
 {
+  "version": 2,
   "framework": "astro",
-  "installCommand": "npm install"
+  "builds": [
+    {
+      "src": "src/pages/**/*.{astro,md,html}",
+      "dest": "public"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/pages/$1"
+    }
+  ]
 }
