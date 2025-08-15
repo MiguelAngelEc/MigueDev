@@ -1,6 +1,6 @@
 
 // Importar GSAP desde el archivo de configuración centralizado
-import { gsap, ScrollTrigger, SplitText } from './gsap-config';
+import { gsap, ScrollTrigger, splitTextIntoChars } from './gsap-config';
 
 export function initMainAnimations() {
   // Verificar que estamos en el navegador
@@ -11,9 +11,16 @@ export function initMainAnimations() {
   const h2Element = document.querySelector('h2')
   const pElement = document.querySelector('p')
   const spanElement = document.querySelector('.char')
-  //const of splitText
-  const split1 = new SplitText(spanElement, { type: "chars" });
-  const split2 = new SplitText(h2Element, { type: "chars" });
+  
+  // Verificar que los elementos existen
+  if (!spanElement || !h2Element) {
+    console.warn('Elementos de texto no encontrados');
+    return;
+  }
+  
+  //const of splitText usando nuestra función personalizada
+  const split1 = splitTextIntoChars(spanElement);
+  const split2 = splitTextIntoChars(h2Element);
   //const of social media
   const imgElement = document.querySelectorAll('.rotate img');
   //const of dev-img
@@ -123,5 +130,6 @@ export function initMainAnimations() {
 // Limpieza
 export function cleanupAnimations() {
   ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  SplitText.getAll().forEach(trigger => trigger.kill());
+  // Limpiar las animaciones de GSAP
+  gsap.killTweensOf('*');
 }

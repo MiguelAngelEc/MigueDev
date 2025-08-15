@@ -44,12 +44,24 @@ import instagram from "../assets/instagram.svg"
 </main>
 
 <script>
-  window.addEventListener('load', async () => {
+  // Importar de forma más robusta
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Verificar que estamos en el navegador
+    if (typeof window === 'undefined') return;
+    
     try {
-      const { initMainAnimations } = await import('../animations/mainAnimations');
-      initMainAnimations();
+      // Importación dinámica con mejor manejo de errores
+      const animationsModule = await import('../animations/mainAnimations.js');
+      
+      if (animationsModule && animationsModule.initMainAnimations) {
+        // Esperar un momento para que el DOM esté completamente cargado
+        setTimeout(() => {
+          animationsModule.initMainAnimations();
+        }, 100);
+      }
     } catch (error) {
-      console.error('Error loading animations:', error);
+      console.error('Error loading GSAP animations:', error);
+      console.warn('Las animaciones no se cargarán, pero el sitio funcionará normalmente');
     }
   });
 </script>

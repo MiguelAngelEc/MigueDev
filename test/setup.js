@@ -46,16 +46,8 @@ vi.mock('gsap/TextPlugin', () => ({
   TextPlugin: vi.fn(),
 }));
 
-// Mock de SplitText
-vi.mock('gsap/SplitText', () => ({
-  default: vi.fn().mockImplementation((element, options) => ({
-    chars: element.textContent?.split('') || [],
-    words: element.textContent?.split(' ') || [],
-    lines: element.textContent?.split('\n') || [],
-  })),
-  SplitText: vi.fn().mockImplementation((element, options) => ({
-    chars: element.textContent?.split('') || [],
-    words: element.textContent?.split(' ') || [],
-    lines: element.textContent?.split('\n') || [],
-  })),
-}));
+// Mock de splitTextIntoChars function
+global.splitTextIntoChars = vi.fn().mockImplementation((element) => {
+  if (!element || !element.textContent) return { chars: [] };
+  return { chars: element.textContent.split('').map(char => ({ textContent: char })) };
+});

@@ -1,5 +1,5 @@
 // Importar GSAP desde el archivo de configuración centralizado
-import { gsap, ScrollTrigger, SplitText } from './gsap-config';
+import { gsap, ScrollTrigger } from './gsap-config';
 
 export function initAboutAnimations() {
   // Verificar que estamos en el navegador
