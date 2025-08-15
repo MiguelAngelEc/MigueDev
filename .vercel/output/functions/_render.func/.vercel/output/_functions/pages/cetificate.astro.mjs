@@ -55,13 +55,19 @@ const $$CategoryCard = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<button${addAttribute(`category-${id}`, "id")} class="flex flex-col items-center gap-2 p-4 rounded-lg transition-all duration-300 will-change-transform hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"${addAttribute(id, "data-category")}${addAttribute(`Ver certificados de ${name}`, "aria-label")}${addAttribute(isActive, "aria-pressed")}> <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"> ${logo ? renderTemplate`<img class="w-full h-full object-contain"${addAttribute(logo, "src")}${addAttribute(`Logo de ${name}`, "alt")} loading="lazy">` : renderTemplate`<div${addAttribute(`w-full h-full ${categoryIcon.color}`, "class")}>${unescapeHTML(categoryIcon.svg)}</div>`} </div> <h2 class="text-sm md:text-lg font-bold text-gray-900 dark:text-white text-center"> ${name} </h2> </button>`;
 }, "C:/Users/Miguel Castillo/Desktop/Proyectos/Porfolio/MigueDev/src/components/CategoryCard.astro", void 0);
 
+var __freeze = Object.freeze;
+var __defProp = Object.defineProperty;
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
+var _a;
 const $$Certificate = createComponent(($$result, $$props, $$slots) => {
   const categories = getCategories();
-  return renderTemplate`${maybeRenderHead()}<main class="flex flex-col w-full h-auto min-h-[625px] px-4 py-4"> <!-- Título principal --> <h2 class="sr-only">Regresar</h2> <a href="/" class="flex items-center mb-8"> <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path> </svg>
-Regresar
-</a> <div class="flex justify-center items-center mb-8"> <h1 class="text-[10vw] sm:text-[6vw] lg:text-[2vw] font-bold text-black dark:text-white text-center">
-Certificates Approved
-</h1> </div> <!-- Sección de categorías --> <section class="mb-8" aria-labelledby="categories-heading"> <h2 id="categories-heading" class="sr-only">Categorías de certificados</h2> <div id="category-cards-container" class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto"> ${categories.map((category) => renderTemplate`${renderComponent($$result, "CategoryCard", $$CategoryCard, { "id": category.id, "name": category.name, "logo": category.logo })}`)} </div> </section> <!-- Sección de certificados --> <section id="certificates-section" class="w-full"> <div id="certificate-container" class="w-full"> <!-- Los certificados se cargarán dinámicamente aquí --> </div> </section> </main> `;
+  return renderTemplate(_a || (_a = __template(["", '<main class="flex flex-col w-full h-auto min-h-[625px] px-4 py-4"> <!-- T\xEDtulo principal --> <h2 class="sr-only">Regresar</h2> <a href="/" class="flex items-center mb-8"> <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path> </svg>\nRegresar\n</a> <div class="flex justify-center items-center mb-8"> <h1 class="text-[10vw] sm:text-[6vw] lg:text-[2vw] font-bold text-black dark:text-white text-center">\nCertificates Approved\n</h1> </div> <!-- Secci\xF3n de categor\xEDas --> <section class="mb-8" aria-labelledby="categories-heading"> <h2 id="categories-heading" class="sr-only">Categor\xEDas de certificados</h2> <div id="category-cards-container" class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto"> ', ` </div> </section> <!-- Secci\xF3n de certificados --> <section id="certificates-section" class="w-full"> <div id="certificate-container" class="w-full"> <!-- Los certificados se cargar\xE1n din\xE1micamente aqu\xED --> </div> </section> </main> <script type="module">
+  import { initializeCertificateLogic } from '../utils/certificate-loader.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeCertificateLogic();
+  });
+<\/script>`])), maybeRenderHead(), categories.map((category) => renderTemplate`${renderComponent($$result, "CategoryCard", $$CategoryCard, { "id": category.id, "name": category.name, "logo": category.logo })}`));
 }, "C:/Users/Miguel Castillo/Desktop/Proyectos/Porfolio/MigueDev/src/components/Certificate.astro", void 0);
 
 const $$Cetificate = createComponent(($$result, $$props, $$slots) => {
