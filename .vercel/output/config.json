@@ -13,15 +13,15 @@
 		},
 		{
 			"src": "^\\/_image$",
-			"dest": "_render"
+			"dest": "render"
 		},
 		{
 			"src": "^\\/cetificate\\/?$",
-			"dest": "_render"
+			"dest": "render"
 		},
 		{
 			"src": "^\\/$",
-			"dest": "_render"
+			"dest": "render"
 		}
 	]
 }
