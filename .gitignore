@@ -25,5 +25,7 @@ pnpm-debug.log*
 
 # Rules cursor
 Rules/
-vscode/
+.vscode
+
+.vercel
 
