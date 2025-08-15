@@ -51,8 +51,9 @@ export function initMainAnimations() {
     }
   });
 
+
   //Animation of Dev-img 
-  gsap.to ([divElement],{
+  gsap.to (divElement,{
     opacity: 0,
     x: 30, // Reducir el desplazamiento
     scale: 0.9, // Ligeramente más pequeño

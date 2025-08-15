@@ -36,39 +36,3 @@ const categoryIcon = getCategoryIcon(id) as { svg: string; color: string };
     {name}
   </h2>
 </button>
-
-<script>
-  // Script para manejar la interactividad de las tarjetas
-  document.addEventListener('DOMContentLoaded', () => {
-    const categoryCards = document.querySelectorAll('[data-category]');
-    
-    categoryCards.forEach(card => {
-      card.addEventListener('click', () => {
-        const categoryId = card.getAttribute('data-category');
-        
-        // Remover clase activa de todas las tarjetas
-        categoryCards.forEach(c => {
-          c.classList.remove('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
-          c.setAttribute('aria-pressed', 'false');
-        });
-        
-        // Agregar clase activa a la tarjeta seleccionada
-        card.classList.add('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
-        card.setAttribute('aria-pressed', 'true');
-        
-        // Disparar evento personalizado para el componente padre
-        const event = new CustomEvent('categorySelected', {
-          detail: { categoryId }
-        });
-        document.dispatchEvent(event);
-      });
-    });
-
-    // Activar la primera categoría por defecto (English)
-    const firstCard = document.querySelector('[data-category="english"]');
-    if (firstCard) {
-      firstCard.classList.add('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
-      firstCard.setAttribute('aria-pressed', 'true');
-    }
-  });
-</script> 
