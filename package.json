@@ -2,6 +2,7 @@
   "name": "miguedev",
   "type": "module",
   "version": "0.0.1",
+  "author": "MIGUE.dev",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

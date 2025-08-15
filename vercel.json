@@ -1,0 +1,4 @@
+{
+  "framework": "astro",
+  "installCommand": "npm install"
+}

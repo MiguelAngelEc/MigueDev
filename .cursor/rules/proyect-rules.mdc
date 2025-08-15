@@ -260,6 +260,8 @@ Ante cualquier duda sobre estas reglas o decisiones de implementación:
 
 ---
 
+- **Despliegue:** [Vercel](https://vercel.com/) - Plataforma de hosting y CI/CD optimizada para proyectos frontend y JAMstack, con integración automática desde GitHub, previsualizaciones de ramas y soporte para dominios personalizados.
+
 **Versión:** 1.0  
 **Última actualización:** [Fecha actual]  
 **Siguiente revisión:** [Fecha programada]
