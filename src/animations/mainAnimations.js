@@ -114,15 +114,38 @@ export function initMainAnimations() {
     }
   });
 
-  ScrollTrigger.create({
-    trigger: mainElement,
-    start: "+=550",
-    end: "+=9999",
-    onEnter: () => {
-      cvSticky.classList.add("fixed");
+  ScrollTrigger.matchMedia({
+    // Desktop
+    "(min-width: 1024px)": function() {
+      ScrollTrigger.create({
+        trigger: mainElement,
+        start: "+=490",
+        end: "+=9999",
+        onEnter: () => cvSticky.classList.add("fixed"),
+        onLeaveBack: () => cvSticky.classList.remove("fixed"),
+      });
     },
-    onLeaveBack: () => {
-      cvSticky.classList.remove("fixed");
+  
+    // Tablet
+    "(min-width: 768px) and (max-width: 1023px)": function() {
+      ScrollTrigger.create({
+        trigger: mainElement,
+        start: "+=250", // start más pequeño
+        end: "+=9999",
+        onEnter: () => cvSticky.classList.add("fixed"),
+        onLeaveBack: () => cvSticky.classList.remove("fixed"),
+      });
+    },
+  
+    // Móvil
+    "(max-width: 767px)": function() {
+      ScrollTrigger.create({
+        trigger: mainElement,
+        start: "+=200", // aún más pequeño
+        end: "+=9999",
+        onEnter: () => cvSticky.classList.add("fixed"),
+        onLeaveBack: () => cvSticky.classList.remove("fixed"),
+      });
     }
   });
 }

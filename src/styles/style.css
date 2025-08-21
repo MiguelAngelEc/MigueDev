@@ -1,6 +1,6 @@
 
 .custom-stroke {
-    -webkit-text-stroke: 3px black; /* Estilo por defecto (desktop) */
+    -webkit-text-stroke: 2px black; /* Estilo por defecto (desktop) */
 }
 
   /* Tablet y móviles (hasta 1024px) */
@@ -29,4 +29,22 @@
 
 #display.display-visible {
   display: flex; /* o el display que necesites */
+}
+
+/* Deshabilitar hover effects en dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  /* Deshabilitar todos los hover effects en dispositivos móviles */
+  *:hover {
+    transform: none !important;
+    scale: none !important;
+  }
+  
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover {
+    transform: none !important;
+  }
+  
+  .group:hover span {
+    width: 0 !important;
+  }
 }
