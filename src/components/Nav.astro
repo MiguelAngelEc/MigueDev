@@ -17,6 +17,8 @@ import logo from "../assets/logo.svg";
         id="menu-toggle"
         class="md:hidden text-2xl focus:outline-none z-50"
         aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
     >
         ☰
     </button>
@@ -56,46 +58,100 @@ import logo from "../assets/logo.svg";
     </ul>
 
     <!-- Menú Mobile/Tablet (overlay) -->
-    <!-- <div 
+    <div 
         id="mobile-menu"
-        class="fixed inset-0 bg-black/95 backdrop-blur-lg z-40 flex-col items-center justify-center space-y-8 hidden md:flex"
+        class="fixed inset-0 w-full h-full bg-black/95 backdrop-blur-lg z-40 hidden md:hidden flex-col items-center justify-center space-y-8 transition-all duration-300 ease-in-out opacity-0"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="menu-heading"
     >
+        <h2 id="menu-heading" class="sr-only">Menú de navegación</h2>
         <button 
             id="menu-close"
-            class="absolute top-6 right-6 text-2xl text-white hover:text-gray-300"
+            class="absolute top-6 right-6 text-3xl text-white hover:text-blue-400 transition-colors p-2"
             aria-label="Cerrar menú"
         >
             ✕
         </button>
-        <ul class="text-center space-y-8">
+        <ul class="text-center space-y-10 w-full px-6">
             <li>
-                <a href="/" class="text-2xl text-white hover:text-blue-400 transition-colors">~/home</a>
+                <a href="/" class="text-3xl font-medium text-white hover:text-blue-400 transition-colors block py-2">~/home</a>
             </li>
             <li>
-                <a href="/about" class="text-2xl text-white hover:text-blue-400 transition-colors">const me = []</a>
+                <a href="#about" class="text-3xl font-medium text-white hover:text-blue-400 transition-colors block py-2">const me = []</a>
             </li>
             <li>
-                <a href="/projects" class="text-2xl text-white hover:text-blue-400 transition-colors">build()</a>
+                <a href="/projects" class="text-3xl font-medium text-white hover:text-blue-400 transition-colors block py-2">build()</a>
             </li>
             <li>
-                <a href="/blog" class="text-2xl text-white hover:text-blue-400 transition-colors">fav()</a>
+                <a href="/blog" class="text-3xl font-medium text-white hover:text-blue-400 transition-colors block py-2">fav()</a>
             </li>
             <li>
-                <a href="/contact" class="text-2xl text-white hover:text-blue-400 transition-colors">log</a>
+                <a href="/contact" class="text-3xl font-medium text-white hover:text-blue-400 transition-colors block py-2">log</a>
             </li>
         </ul>
-    </div> -->
+    </div>
 </nav>
 
 <!-- Script para el menú hamburguesa -->
-<!-- <script is:inline>
-    document.getElementById("menu-toggle").addEventListener("click", () => {
-        document.getElementById("mobile-menu").classList.remove("hidden");
+<script is:inline>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuClose = document.getElementById("menu-close");
+    
+    function openMenu() {
+        // Primero quitamos hidden y añadimos flex para que sea visible
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.classList.add("flex");
+        
+        // Pequeño retraso para permitir que la transición funcione
+        setTimeout(() => {
+            mobileMenu.classList.add("opacity-100");
+            mobileMenu.classList.remove("opacity-0");
+        }, 10);
+        
+        menuToggle.setAttribute("aria-expanded", "true");
         document.body.style.overflow = "hidden"; // Bloquea el scroll
+    }
+    
+    function closeMenu() {
+        // Primero aplicamos la transición de opacidad
+        mobileMenu.classList.add("opacity-0");
+        mobileMenu.classList.remove("opacity-100");
+        
+        // Esperamos a que termine la transición antes de ocultar
+        setTimeout(() => {
+            mobileMenu.classList.add("hidden");
+            mobileMenu.classList.remove("flex");
+            document.body.style.overflow = "auto"; // Restaura el scroll
+        }, 300); // Mismo tiempo que la duración de la transición
+        
+        menuToggle.setAttribute("aria-expanded", "false");
+    }
+    
+    // Inicializar con opacidad 0 para permitir transición
+    mobileMenu.classList.add("opacity-0");
+    
+    // Añadir soporte para eventos touch y click
+    menuToggle.addEventListener("click", openMenu);
+    menuToggle.addEventListener("touchstart", function(e) {
+        e.preventDefault();
+        openMenu();
+    });
+    menuClose.addEventListener("click", closeMenu);
+    menuClose.addEventListener("touchstart", function(e) {
+        e.preventDefault();
+        closeMenu();
+    });
+    
+    // Cerrar el menú al hacer clic o tocar en los enlaces
+    document.querySelectorAll("#mobile-menu a").forEach(link => {
+        link.addEventListener("click", closeMenu);
+        link.addEventListener("touchstart", function(e) {
+            // No prevenimos el comportamiento predeterminado aquí para permitir la navegación
+            // Solo cerramos el menú
+            closeMenu();
+        });
     });
 
-    document.getElementById("menu-close").addEventListener("click", () => {
-        document.getElementById("mobile-menu").classList.add("hidden");
-        document.body.style.overflow = "auto"; // Restaura el scroll
-    });
-</script> -->
+</script>
