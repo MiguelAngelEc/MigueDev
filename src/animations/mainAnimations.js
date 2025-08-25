@@ -119,7 +119,7 @@ export function initMainAnimations() {
     "(min-width: 1024px)": function() {
       ScrollTrigger.create({
         trigger: mainElement,
-        start: "+=490",
+        start: "+=523",
         end: "+=9999",
         onEnter: () => cvSticky.classList.add("fixed"),
         onLeaveBack: () => cvSticky.classList.remove("fixed"),
