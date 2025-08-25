@@ -10,18 +10,6 @@
 		},
 		{
 			"handle": "filesystem"
-		},
-		{
-			"src": "^\\/_image$",
-			"dest": "render"
-		},
-		{
-			"src": "^\\/cetificate\\/?$",
-			"dest": "render"
-		},
-		{
-			"src": "^\\/$",
-			"dest": "render"
 		}
 	]
 }
