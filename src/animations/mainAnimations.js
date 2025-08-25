@@ -7,10 +7,10 @@ export function initMainAnimations() {
   if (typeof window === 'undefined') return;
 
   //const of text
-  const h1Element = document.querySelector('h1')
-  const h2Element = document.querySelector('h2')
-  const pElement = document.querySelector('p')
-  const spanElement = document.querySelector('.char')
+  const h1Element = document.querySelector('main h1')
+  const h2Element = document.querySelector('main h2')
+  const pElement = document.querySelector('main p')
+  const spanElement = document.querySelector('main .char')
   
   // Verificar que los elementos existen
   if (!spanElement || !h2Element) {
