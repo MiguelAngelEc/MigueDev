@@ -1,35 +1,33 @@
-
 // Importar GSAP desde el archivo de configuración centralizado
-import { gsap, ScrollTrigger, splitTextIntoChars } from './gsap-config';
+import { gsap, ScrollTrigger, splitTextIntoChars } from "./gsap-config";
 
 export function initMainAnimations() {
   // Verificar que estamos en el navegador
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   //const of text
-  const h1Element = document.querySelector('main h1')
-  const h2Element = document.querySelector('main h2')
-  const pElement = document.querySelector('main p')
-  const spanElement = document.querySelector('main .char')
-  
+  const h1Element = document.querySelector("main h1");
+  const h2Element = document.querySelector("main h2");
+  const pElement = document.querySelector("main p");
+  const spanElement = document.querySelector("main .char");
+
   // Verificar que los elementos existen
   if (!spanElement || !h2Element) {
-    console.warn('Elementos de texto no encontrados');
+    console.warn("Elementos de texto no encontrados");
     return;
   }
-  
+
   //const of splitText usando nuestra función personalizada
   const split1 = splitTextIntoChars(spanElement);
   const split2 = splitTextIntoChars(h2Element);
   //const of social media
-  const imgElement = document.querySelectorAll('.rotate img');
+  const imgElement = document.querySelectorAll(".rotate img");
   //const of dev-img
-  const divElement = document.querySelector('.dev-img img')
+  const divElement = document.querySelector(".dev-img img");
   //const of main
-  const mainElement = document.querySelector('main');
+  const mainElement = document.querySelector("main");
   //cost of CV
   const cvSticky = document.querySelector(".curriculum button");
-  
 
   //Animation of text without scroll
   gsap.from(split1.chars, {
@@ -37,7 +35,7 @@ export function initMainAnimations() {
     x: -100,
     opacity: 0,
     stagger: 0.05,
-    ease: 'power3.out',
+    ease: "power3.out",
   });
 
   gsap.from(split2.chars, {
@@ -45,7 +43,7 @@ export function initMainAnimations() {
     x: 100,
     opacity: 0,
     stagger: 0.05,
-    ease: 'power2.out',
+    ease: "power2.out",
   });
 
   //Animation of text with scroll
@@ -58,12 +56,11 @@ export function initMainAnimations() {
       start: "top top",
       end: "+=400",
       scrub: true,
-    }
+    },
   });
 
-
-  //Animation of Dev-img 
-  gsap.to (divElement,{
+  //Animation of Dev-img
+  gsap.to(divElement, {
     opacity: 0,
     x: 30, // Reducir el desplazamiento
     scale: 0.9, // Ligeramente más pequeño
@@ -73,9 +70,9 @@ export function initMainAnimations() {
       start: "top top",
       end: "+=400",
       scrub: true,
-      toggleActions: "play none none none"
-    }
-  })
+      toggleActions: "play none none none",
+    },
+  });
 
   //Animation of social media icons
   imgElement.forEach((img, i) => {
@@ -83,7 +80,7 @@ export function initMainAnimations() {
     gsap.set(img, {
       rotation: 0,
       x: 0,
-      opacity: 1
+      opacity: 1,
     });
 
     // Crear la animación controlada por scroll
@@ -95,11 +92,11 @@ export function initMainAnimations() {
       transformOrigin: "center center",
       scrollTrigger: {
         trigger: mainElement, // Usar el elemento principal como disparador
-        start: "top",    // Comenzar cuando el top del viewport toque el top del trigger
-        end: "+=100",         // Terminar después de 500px de scroll
+        start: "top", // Comenzar cuando el top del viewport toque el top del trigger
+        end: "+=100", // Terminar después de 500px de scroll
         scrub: true,
-        toggleActions: "play none none none" // Solo reproducir en scroll hacia abajo
-      }
+        toggleActions: "play none none none", // Solo reproducir en scroll hacia abajo
+      },
     });
   });
 
@@ -109,14 +106,14 @@ export function initMainAnimations() {
     scrollTrigger: {
       trigger: mainElement,
       start: "top top", // empieza antes de que top llegue a top
-      end: "+=100",       // termina cuando top top se alinea
-      scrub: true
-    }
+      end: "+=100", // termina cuando top top se alinea
+      scrub: true,
+    },
   });
 
   ScrollTrigger.matchMedia({
     // Desktop
-    "(min-width: 1024px)": function() {
+    "(min-width: 1024px)": function () {
       ScrollTrigger.create({
         trigger: mainElement,
         start: "+=523",
@@ -125,9 +122,9 @@ export function initMainAnimations() {
         onLeaveBack: () => cvSticky.classList.remove("fixed"),
       });
     },
-  
+
     // Tablet
-    "(min-width: 768px) and (max-width: 1023px)": function() {
+    "(min-width: 768px) and (max-width: 1023px)": function () {
       ScrollTrigger.create({
         trigger: mainElement,
         start: "+=250", // start más pequeño
@@ -136,9 +133,9 @@ export function initMainAnimations() {
         onLeaveBack: () => cvSticky.classList.remove("fixed"),
       });
     },
-  
+
     // Móvil
-    "(max-width: 767px)": function() {
+    "(max-width: 767px)": function () {
       ScrollTrigger.create({
         trigger: mainElement,
         start: "+=200", // aún más pequeño
@@ -146,13 +143,13 @@ export function initMainAnimations() {
         onEnter: () => cvSticky.classList.add("fixed"),
         onLeaveBack: () => cvSticky.classList.remove("fixed"),
       });
-    }
+    },
   });
 }
 
 // Limpieza
 export function cleanupAnimations() {
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
   // Limpiar las animaciones de GSAP
-  gsap.killTweensOf('*');
+  gsap.killTweensOf("*");
 }

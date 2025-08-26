@@ -67,24 +67,27 @@ src/
 ## 🔧 Uso
 
 ### Obtener Categorías
+
 ```javascript
-import { getCategories } from '../utils/putCertificados.js';
+import { getCategories } from "../utils/putCertificados.js";
 const categories = getCategories();
 ```
 
 ### Obtener Certificados
+
 ```javascript
-import { getCertificatesByCategory } from '../utils/putCertificados.js';
-const certificates = await getCertificatesByCategory('python');
+import { getCertificatesByCategory } from "../utils/putCertificados.js";
+const certificates = await getCertificatesByCategory("python");
 ```
 
 ### Agregar Nueva Categoría
+
 ```javascript
 // En CertificateManager.js
 this.categories.newCategory = {
-  name: 'Nueva Categoría',
-  logo: '/path/to/logo.png',
-  certificates: ['url1', 'url2', 'url3']
+  name: "Nueva Categoría",
+  logo: "/path/to/logo.png",
+  certificates: ["url1", "url2", "url3"],
 };
 ```
 
@@ -129,4 +132,4 @@ expect(categories).toHaveLength(4);
 - [ ] Filtros por fecha/plataforma
 - [ ] Búsqueda de certificados
 - [ ] Exportación de certificados
-- [ ] Integración con APIs externas 
+- [ ] Integración con APIs externas

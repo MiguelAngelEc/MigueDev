@@ -1,30 +1,30 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/static';
+import { defineConfig } from "astro/config";
+import tailwind from "@astrojs/tailwind";
+import vercel from "@astrojs/vercel/static";
 
 export default defineConfig({
-  output: 'static',
+  output: "static",
   adapter: vercel(),
   integrations: [tailwind()],
   vite: {
     ssr: {
       // Excluir bibliotecas problemáticas del SSR
-      external: ['sharp']
+      external: ["sharp"],
     },
     optimizeDeps: {
       // Pre-optimizar GSAP para mejor performance
-      include: ['gsap', 'gsap/ScrollTrigger', 'gsap/TextPlugin']
+      include: ["gsap", "gsap/ScrollTrigger", "gsap/TextPlugin"],
     },
     build: {
       rollupOptions: {
         output: {
           // Optimizar chunks para GSAP
           manualChunks: {
-            'gsap-core': ['gsap'],
-            'gsap-plugins': ['gsap/ScrollTrigger', 'gsap/TextPlugin']
-          }
-        }
-      }
-    }
-  }
+            "gsap-core": ["gsap"],
+            "gsap-plugins": ["gsap/ScrollTrigger", "gsap/TextPlugin"],
+          },
+        },
+      },
+    },
+  },
 });

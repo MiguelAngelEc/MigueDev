@@ -1,15 +1,15 @@
 // Configuración global para las pruebas
-import { expect, afterEach, vi } from 'vitest';
-import '@testing-library/jest-dom';
+import { expect, afterEach, vi } from "vitest";
+import "@testing-library/jest-dom";
 
 // Limpia el entorno después de cada prueba
 afterEach(() => {
   // Limpia solo si existen
-  if (typeof document !== 'undefined' && document.body) {
-    document.body.innerHTML = '';
+  if (typeof document !== "undefined" && document.body) {
+    document.body.innerHTML = "";
   }
-  if (typeof document !== 'undefined' && document.head) {
-    document.head.innerHTML = '';
+  if (typeof document !== "undefined" && document.head) {
+    document.head.innerHTML = "";
   }
 });
 
@@ -29,19 +29,19 @@ const gsapMock = {
   registerPlugin: vi.fn(),
 };
 
-vi.mock('gsap', () => ({
+vi.mock("gsap", () => ({
   ...gsapMock,
   gsap: gsapMock,
 }));
 
 // Mock de ScrollTrigger
-vi.mock('gsap/ScrollTrigger', () => ({
+vi.mock("gsap/ScrollTrigger", () => ({
   default: vi.fn(),
   ScrollTrigger: vi.fn(),
 }));
 
 // Mock de TextPlugin
-vi.mock('gsap/TextPlugin', () => ({
+vi.mock("gsap/TextPlugin", () => ({
   default: vi.fn(),
   TextPlugin: vi.fn(),
 }));
@@ -49,5 +49,7 @@ vi.mock('gsap/TextPlugin', () => ({
 // Mock de splitTextIntoChars function
 global.splitTextIntoChars = vi.fn().mockImplementation((element) => {
   if (!element || !element.textContent) return { chars: [] };
-  return { chars: element.textContent.split('').map(char => ({ textContent: char })) };
+  return {
+    chars: element.textContent.split("").map((char) => ({ textContent: char })),
+  };
 });

@@ -1,4 +1,4 @@
-import { certificateManager } from './CertificateManager.js';
+import { certificateManager } from "./CertificateManager.js";
 
 /**
  * Obtiene todos los certificados de inglés (mantiene compatibilidad)
@@ -6,9 +6,9 @@ import { certificateManager } from './CertificateManager.js';
  */
 export const getCertificates = async () => {
   try {
-    return await certificateManager.getCertificatesByCategory('english');
+    return await certificateManager.getCertificatesByCategory("english");
   } catch (error) {
-    console.error('Error al cargar certificados:', error);
+    console.error("Error al cargar certificados:", error);
     return [];
   }
 };
@@ -51,7 +51,7 @@ const englishCertificates = [
   "https://platzi.com/MigueEc/curso/2414-course/diploma-og/og.jpeg",
   "https://platzi.com/MigueEc/curso/9144-course/diploma-og/og.jpeg",
   "https://platzi.com/MigueEc/curso/2418-course/diploma-og/og.jpeg",
-  "https://platzi.com/MigueEc/curso/7736-course/diploma-og/og.jpeg"
+  "https://platzi.com/MigueEc/curso/7736-course/diploma-og/og.jpeg",
 ];
 
 const checkImage = (url) => {

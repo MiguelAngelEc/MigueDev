@@ -1,8 +1,10 @@
-import { getCertificatesByCategory } from './putCertificados.js';
+import { getCertificatesByCategory } from "./putCertificados.js";
 
 export function initializeCertificateLogic() {
-  const certificateContainer = document.getElementById('certificate-container');
-  const categoryCardsContainer = document.getElementById('category-cards-container');
+  const certificateContainer = document.getElementById("certificate-container");
+  const categoryCardsContainer = document.getElementById(
+    "category-cards-container",
+  );
 
   if (!certificateContainer || !categoryCardsContainer) {
     return; // Salir si los elementos no existen en la página actual
@@ -12,7 +14,7 @@ export function initializeCertificateLogic() {
 
   const displayCertificates = async (categoryId) => {
     if (isLoading) return;
-    
+
     isLoading = true;
 
     // Mostrar loading
@@ -25,17 +27,25 @@ export function initializeCertificateLogic() {
 
     try {
       const certificates = await getCertificatesByCategory(categoryId);
-      const categoryName = document.querySelector(`[data-category="${categoryId}"] h2`)?.textContent || 'Certificados';
-      
-      const gridComponent = document.createElement('div');
-      gridComponent.id = 'certificate-display';
-      gridComponent.className = 'w-full transition-all duration-500 ease-in-out';
-      gridComponent.setAttribute('aria-label', `Certificados de ${categoryName}`);
+      const categoryName =
+        document.querySelector(`[data-category="${categoryId}"] h2`)
+          ?.textContent || "Certificados";
+
+      const gridComponent = document.createElement("div");
+      gridComponent.id = "certificate-display";
+      gridComponent.className =
+        "w-full transition-all duration-500 ease-in-out";
+      gridComponent.setAttribute(
+        "aria-label",
+        `Certificados de ${categoryName}`,
+      );
 
       if (certificates.length > 0) {
         gridComponent.innerHTML = `
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
-            ${certificates.map((certUrl, index) => `
+            ${certificates
+              .map(
+                (certUrl, index) => `
               <article class="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 will-change-transform hover:scale-105" role="article">
                 <img
                   class="w-full h-48 md:h-56 object-cover transition-transform duration-300 group-hover:scale-110"
@@ -52,7 +62,9 @@ export function initializeCertificateLogic() {
                   </div>
                 </div>
               </article>
-            `).join('')}
+            `,
+              )
+              .join("")}
           </div>
         `;
       } else {
@@ -73,15 +85,14 @@ export function initializeCertificateLogic() {
         `;
       }
 
-      certificateContainer.innerHTML = '';
+      certificateContainer.innerHTML = "";
       certificateContainer.appendChild(gridComponent);
-      
-      setTimeout(() => {
-        gridComponent.classList.add('opacity-100');
-      }, 100);
 
+      setTimeout(() => {
+        gridComponent.classList.add("opacity-100");
+      }, 100);
     } catch (error) {
-      console.error('Error al cargar certificados:', error);
+      console.error("Error al cargar certificados:", error);
       certificateContainer.innerHTML = `
         <div class="flex flex-col items-center justify-center py-12 text-center">
           <div class="text-red-400 mb-4">
@@ -102,22 +113,34 @@ export function initializeCertificateLogic() {
     }
   };
 
-  categoryCardsContainer.addEventListener('click', (event) => {
+  categoryCardsContainer.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
-    const card = event.target.closest('button[data-category]');
+    const card = event.target.closest("button[data-category]");
     if (!card) return;
 
-    const categoryId = card.getAttribute('data-category');
+    const categoryId = card.getAttribute("data-category");
     if (!categoryId) return;
 
-    const allCards = categoryCardsContainer.querySelectorAll('button[data-category]');
-    allCards.forEach(c => {
-      c.classList.remove('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
-      c.setAttribute('aria-pressed', 'false');
+    const allCards = categoryCardsContainer.querySelectorAll(
+      "button[data-category]",
+    );
+    allCards.forEach((c) => {
+      c.classList.remove(
+        "bg-blue-100",
+        "dark:bg-blue-900",
+        "border-blue-300",
+        "dark:border-blue-600",
+      );
+      c.setAttribute("aria-pressed", "false");
     });
 
-    card.classList.add('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
-    card.setAttribute('aria-pressed', 'true');
+    card.classList.add(
+      "bg-blue-100",
+      "dark:bg-blue-900",
+      "border-blue-300",
+      "dark:border-blue-600",
+    );
+    card.setAttribute("aria-pressed", "true");
 
     displayCertificates(categoryId);
   });
@@ -125,8 +148,13 @@ export function initializeCertificateLogic() {
   // Activar la primera categoría y cargar certificados por defecto
   const firstCard = document.querySelector('[data-category="english"]');
   if (firstCard) {
-    firstCard.classList.add('bg-blue-100', 'dark:bg-blue-900', 'border-blue-300', 'dark:border-blue-600');
-    firstCard.setAttribute('aria-pressed', 'true');
+    firstCard.classList.add(
+      "bg-blue-100",
+      "dark:bg-blue-900",
+      "border-blue-300",
+      "dark:border-blue-600",
+    );
+    firstCard.setAttribute("aria-pressed", "true");
   }
-  displayCertificates('english');
+  displayCertificates("english");
 }

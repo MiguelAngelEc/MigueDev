@@ -4,30 +4,45 @@
  */
 class CertificateManager {
   constructor() {
-    const certificateEnglesh= [2567, 2519, 2414, 9144, 2418, 7736, 6934, 2417];
+    const certificateEnglesh = [2567, 2519, 2414, 9144, 2418, 7736, 6934, 2417];
     const cetificatePython = [10002, 4261, 10662, 11025, 4260, 1775, 2299];
-    const cetificateJavaScript = [1814, 3504, 1798, 10266, 10135, 6933, 8617, 2156, 6240, 3578, 3213, 2461, 3175, 2332, 2419]
-    const cetificateUXUI = []
+    const cetificateJavaScript = [
+      1814, 3504, 1798, 10266, 10135, 6933, 8617, 2156, 6240, 3578, 3213, 2461,
+      3175, 2332, 2419,
+    ];
+    const cetificateUXUI = [];
     this.categories = {
       english: {
         name: "English",
         logo: "/src/assets/logo-certif.png",
-        certificates: certificateEnglesh.map((num) => `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`)
+        certificates: certificateEnglesh.map(
+          (num) =>
+            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+        ),
       },
       python: {
         name: "Python",
         logo: "/src/assets/logo-certif.png",
-        certificates: cetificatePython.map((num) => `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`)
+        certificates: cetificatePython.map(
+          (num) =>
+            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+        ),
       },
       javascript: {
         name: "JavaScript",
         logo: "/src/assets/logo-certif.png",
-        certificates: cetificateJavaScript.map((num) => `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`)
+        certificates: cetificateJavaScript.map(
+          (num) =>
+            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+        ),
       },
       uxui: {
         name: "UX/UI",
         logo: "/src/assets/logo-certif.png",
-        certificates: cetificateUXUI.map((num) => `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`)
+        certificates: cetificateUXUI.map(
+          (num) =>
+            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+        ),
       },
     };
   }
@@ -56,10 +71,10 @@ class CertificateManager {
         console.warn(`Categoría no encontrada: ${categoryId}`);
         return [];
       }
-      
+
       // Devolver las URLs sin validación (más rápido)
       return category.certificates;
-      
+
       // Si necesitas validación, descomenta la siguiente línea y comenta la anterior
       // return await this.validateCertificates(category.certificates);
     } catch (error) {
@@ -75,17 +90,21 @@ class CertificateManager {
    */
   async validateCertificates(urls) {
     if (!urls || !urls.length) return [];
-    
+
     try {
       // Usar Promise.allSettled para manejar errores sin detener la ejecución
       const results = await Promise.allSettled(
-        urls.map(url => this.checkImageUrl(url).then(isValid => ({ url, isValid })))
+        urls.map((url) =>
+          this.checkImageUrl(url).then((isValid) => ({ url, isValid })),
+        ),
       );
-      
+
       // Filtrar solo las promesas resueltas con isValid = true
       return results
-        .filter(result => result.status === 'fulfilled' && result.value.isValid)
-        .map(result => result.value.url);
+        .filter(
+          (result) => result.status === "fulfilled" && result.value.isValid,
+        )
+        .map((result) => result.value.url);
     } catch (error) {
       console.error("Error al validar certificados:", error);
       return [];
@@ -100,13 +119,13 @@ class CertificateManager {
   checkImageUrl(url) {
     return new Promise((resolve) => {
       // Si la URL no es válida, rechazar inmediatamente
-      if (!url || typeof url !== 'string') {
+      if (!url || typeof url !== "string") {
         return resolve(false);
       }
 
       const img = new Image();
       let timeoutId;
-      
+
       // Configurar timeout para evitar esperas infinitas
       timeoutId = setTimeout(() => {
         cleanup();
@@ -117,7 +136,7 @@ class CertificateManager {
         if (timeoutId) clearTimeout(timeoutId);
         img.onload = null;
         img.onerror = null;
-        img.src = '';
+        img.src = "";
       };
 
       img.onload = () => {
@@ -133,10 +152,10 @@ class CertificateManager {
       };
 
       // Configuración para mejorar el rendimiento
-      img.crossOrigin = 'anonymous';
-      img.referrerPolicy = 'no-referrer';
-      img.loading = 'lazy';
-      
+      img.crossOrigin = "anonymous";
+      img.referrerPolicy = "no-referrer";
+      img.loading = "lazy";
+
       // Iniciar carga
       img.src = url;
     });
