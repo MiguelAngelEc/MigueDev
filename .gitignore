@@ -24,8 +24,5 @@ pnpm-debug.log*
 .idea/
 
 # Rules cursor
-Rules/
 .vscode
-
-.vercel
 
