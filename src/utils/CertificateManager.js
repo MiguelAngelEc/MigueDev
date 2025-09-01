@@ -4,7 +4,7 @@
  */
 class CertificateManager {
   constructor() {
-    const certificateEnglesh = [2567, 2519, 2414, 9144, 2418, 7736, 6934, 2417];
+    const certificateEnglish = [2567, 2519, 2414, 9144, 2418, 7736, 6934, 2417];
     const cetificatePython = [10002, 4261, 10662, 11025, 4260, 1775, 2299];
     const cetificateJavaScript = [
       1814, 3504, 1798, 10266, 10135, 6933, 8617, 2156, 6240, 3578, 3213, 2461,
@@ -15,9 +15,9 @@ class CertificateManager {
       english: {
         name: "English",
         logo: null,
-        certificates: certificateEnglesh.map(
+        certificates: certificateEnglish.map(
           (num) =>
-            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+            `https://platzi.com/Migue.dev/curso/${num}-course/diploma-og/og.jpeg`,
         ),
       },
       python: {
@@ -25,7 +25,7 @@ class CertificateManager {
         logo: null,
         certificates: cetificatePython.map(
           (num) =>
-            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+            `https://platzi.com/Migue.dev/curso/${num}-course/diploma-og/og.jpeg`,
         ),
       },
       javascript: {
@@ -33,7 +33,7 @@ class CertificateManager {
         logo: null,
         certificates: cetificateJavaScript.map(
           (num) =>
-            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+            `https://platzi.com/Migue.dev/curso/${num}-course/diploma-og/og.jpeg`,
         ),
       },
       uxui: {
@@ -41,7 +41,7 @@ class CertificateManager {
         logo: null,
         certificates: cetificateUXUI.map(
           (num) =>
-            `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
+            `https://platzi.com/Migue.dev/curso/${num}-course/diploma-og/og.jpeg`,
         ),
       },
     };
@@ -73,11 +73,13 @@ class CertificateManager {
       }
 
       console.log(`Cargando ${category.certificates.length} certificados para la categoría: ${categoryId}`);
+      console.log("URLs generadas:", category.certificates);
       
-      // Devolver las URLs sin validación para mejorar velocidad de carga
+      // Temporalmente devolver sin validar para diagnosticar
+      // TODO: Rehabilitar validación después de confirmar URLs
       return category.certificates;
-
-      // Si necesitas validación, descomenta la siguiente línea y comenta la anterior
+      
+      // Validar certificados para asegurar que las URLs funcionan
       // return await this.validateCertificates(category.certificates);
     } catch (error) {
       console.error("Error al obtener certificados:", error);

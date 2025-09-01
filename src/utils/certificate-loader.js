@@ -1,5 +1,84 @@
 import { getCertificatesByCategory } from "./putCertificados.js";
 
+/**
+ * Espera a que todas las imágenes de certificados se carguen completamente
+ * @param {HTMLElement} container - Contenedor con las imágenes
+ * @param {number} expectedCount - Número esperado de imágenes
+ * @param {HTMLElement} statusElement - Elemento para mostrar progreso (opcional)
+ * @returns {Promise<void>}
+ */
+function waitForAllImages(container, expectedCount, statusElement = null) {
+  return new Promise((resolve) => {
+    const images = container.querySelectorAll('.certificate-img');
+    let loadedCount = 0;
+    let errorCount = 0;
+    
+    console.log(`📸 Esperando que carguen ${images.length} imágenes...`);
+    
+    if (images.length === 0) {
+      resolve();
+      return;
+    }
+
+    const updateProgress = () => {
+      const total = images.length;
+      const completed = loadedCount + errorCount;
+      
+      if (statusElement) {
+        statusElement.textContent = `Cargando imágenes: ${completed}/${total}`;
+      }
+      
+      if (completed >= total) {
+        console.log(`✅ Todas las imágenes procesadas: ${loadedCount} exitosas, ${errorCount} con error`);
+        if (statusElement) {
+          statusElement.textContent = '¡Certificados cargados!';
+        }
+        resolve();
+      }
+    };
+
+    images.forEach((img, index) => {
+      const handleLoad = () => {
+        loadedCount++;
+        img.style.opacity = '1';
+        img.style.transition = 'opacity 0.5s ease-in-out';
+        console.log(`📸 Imagen ${index + 1} cargada`);
+        updateProgress();
+      };
+
+      const handleError = () => {
+        errorCount++;
+        // Mostrar placeholder mejorado
+        img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmM2Y0ZjY7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTVlN2ViO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxNjAiIHI9IjMwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjY2QiIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik0xMzUgMTQ1bDEwIDEwbTAtMTBsLTEwIDEwIiBzdHJva2U9IiNjY2QiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHRleHQgeD0iNTAlIiB5PSI2MCUiIGZvbnQtZmFtaWx5PSJBCMLHSYW4sc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNiNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNlcnRpZmljYWRvIG5vIGRpc3BvbmlibGU8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI3NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjYmJjIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW50w6ludGVsbyBkZSBudWV2bzwvdGV4dD48L3N2Zz4=';
+        img.style.opacity = '1';
+        img.style.transition = 'opacity 0.5s ease-in-out';
+        console.log(`❌ Error al cargar imagen ${index + 1}`);
+        updateProgress();
+      };
+
+      // Si la imagen ya está cargada
+      if (img.complete && img.naturalWidth > 0) {
+        handleLoad();
+      } else if (img.complete) {
+        // Imagen completa pero con error
+        handleError();
+      } else {
+        // Configurar eventos
+        img.addEventListener('load', handleLoad, { once: true });
+        img.addEventListener('error', handleError, { once: true });
+      }
+    });
+
+    // Timeout de seguridad
+    setTimeout(() => {
+      if (loadedCount + errorCount < images.length) {
+        console.log(`⏰ Timeout: forzando resolución después de esperar imágenes`);
+        resolve();
+      }
+    }, 10000); // 10 segundos máximo
+  });
+}
+
 export function initializeCertificateLogic() {
   console.log("🔍 Iniciando certificate logic...");
   const certificateContainer = document.getElementById("certificate-container");
@@ -24,18 +103,31 @@ export function initializeCertificateLogic() {
 
     isLoading = true;
 
-    // Mostrar loading
+    // Mostrar loading mejorado
     certificateContainer.innerHTML = `
-      <div class="flex justify-center items-center py-12">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-        <span class="ml-3 text-gray-600 dark:text-gray-300">Cargando certificados...</span>
+      <div class="flex flex-col justify-center items-center py-12">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
+        <span class="text-lg font-medium text-gray-700 dark:text-gray-200 mb-2">Cargando certificados...</span>
+        <span id="loading-status" class="text-sm text-gray-500 dark:text-gray-400">Obteniendo datos...</span>
       </div>
     `;
 
     try {
       console.log(`🔄 Cargando certificados para: ${categoryId}`);
+      
+      // Actualizar status de loading
+      const loadingStatus = document.getElementById('loading-status');
+      if (loadingStatus) {
+        loadingStatus.textContent = `Obteniendo certificados de ${categoryId}...`;
+      }
+
       const certificates = await getCertificatesByCategory(categoryId);
       console.log(`✅ Certificados obtenidos: ${certificates.length}`);
+      
+      if (loadingStatus) {
+        loadingStatus.textContent = `Preparando ${certificates.length} certificados...`;
+      }
+
       const categoryName =
         document.querySelector(`[data-category="${categoryId}"] h2`)
           ?.textContent || "Certificados";
@@ -51,20 +143,21 @@ export function initializeCertificateLogic() {
       );
 
       if (certificates.length > 0) {
-        gridComponent.innerHTML = `
+        // Crear la estructura HTML del grid
+        const gridHTML = `
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
             ${certificates
               .map(
                 (certUrl, index) => `
               <article class="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 will-change-transform hover:scale-105" role="article">
                 <img
-                  class="w-full h-48 md:h-56 object-cover transition-transform duration-300 group-hover:scale-110"
+                  class="certificate-img w-full h-48 md:h-56 object-cover transition-transform duration-300 group-hover:scale-110 opacity-0"
                   src="${certUrl}"
                   alt="Certificado ${index + 1} de ${categoryName}"
                   loading="lazy"
                   width="300"
                   height="400"
-                  onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNiNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNlcnRpZmljYWRvIG5vIGRpc3BvbmlibGU8L3RleHQ+PC9zdmc+';"
+                  data-cert-index="${index}"
                 />
                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
                   <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
@@ -78,6 +171,7 @@ export function initializeCertificateLogic() {
               .join("")}
           </div>
         `;
+        gridComponent.innerHTML = gridHTML;
       } else {
         gridComponent.innerHTML = `
           <div class="flex flex-col items-center justify-center py-12 text-center">
@@ -98,6 +192,16 @@ export function initializeCertificateLogic() {
 
       certificateContainer.innerHTML = "";
       certificateContainer.appendChild(gridComponent);
+
+      // Si hay certificados, esperar a que todas las imágenes carguen
+      if (certificates.length > 0) {
+        // Buscar el contenedor de loading que aún puede estar visible
+        const currentLoadingStatus = document.querySelector('#loading-status');
+        if (currentLoadingStatus) {
+          currentLoadingStatus.textContent = 'Cargando imágenes...';
+        }
+        await waitForAllImages(gridComponent, certificates.length, currentLoadingStatus);
+      }
 
       setTimeout(() => {
         gridComponent.classList.add("opacity-100");
