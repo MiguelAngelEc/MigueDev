@@ -1,12 +1,19 @@
 import { getCertificatesByCategory } from "./putCertificados.js";
 
 export function initializeCertificateLogic() {
+  console.log("🔍 Iniciando certificate logic...");
   const certificateContainer = document.getElementById("certificate-container");
   const categoryCardsContainer = document.getElementById(
     "category-cards-container",
   );
 
+  console.log("📦 Elementos encontrados:", {
+    certificateContainer: !!certificateContainer,
+    categoryCardsContainer: !!categoryCardsContainer
+  });
+
   if (!certificateContainer || !categoryCardsContainer) {
+    console.error("❌ Elementos necesarios no encontrados");
     return; // Salir si los elementos no existen en la página actual
   }
 
@@ -26,10 +33,13 @@ export function initializeCertificateLogic() {
     `;
 
     try {
+      console.log(`🔄 Cargando certificados para: ${categoryId}`);
       const certificates = await getCertificatesByCategory(categoryId);
+      console.log(`✅ Certificados obtenidos: ${certificates.length}`);
       const categoryName =
         document.querySelector(`[data-category="${categoryId}"] h2`)
           ?.textContent || "Certificados";
+      console.log(`📋 Nombre categoría: ${categoryName}`);
 
       const gridComponent = document.createElement("div");
       gridComponent.id = "certificate-display";
@@ -54,6 +64,7 @@ export function initializeCertificateLogic() {
                   loading="lazy"
                   width="300"
                   height="400"
+                  onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNiNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNlcnRpZmljYWRvIG5vIGRpc3BvbmlibGU8L3RleHQ+PC9zdmc+';"
                 />
                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
                   <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">

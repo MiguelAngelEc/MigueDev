@@ -1,1 +1,0 @@
-import{_ as e}from"./preload-helper.CLcXU_4U.js";document.addEventListener("DOMContentLoaded",async()=>{try{const{initializeCertificateLogic:i}=await e(async()=>{const{initializeCertificateLogic:t}=await import("./certificate-loader.D6oJuZ7g.js");return{initializeCertificateLogic:t}},[]);i()}catch(i){console.error("Error loading certificate logic:",i)}});

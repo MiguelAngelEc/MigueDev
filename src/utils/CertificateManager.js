@@ -14,15 +14,15 @@ class CertificateManager {
     this.categories = {
       english: {
         name: "English",
-        logo: "/src/assets/logo-certif.png",
+        logo: null,
         certificates: certificateEnglesh.map(
           (num) =>
             `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
         ),
       },
       python: {
-        name: "Python",
-        logo: "/src/assets/logo-certif.png",
+        name: "Python", 
+        logo: null,
         certificates: cetificatePython.map(
           (num) =>
             `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
@@ -30,7 +30,7 @@ class CertificateManager {
       },
       javascript: {
         name: "JavaScript",
-        logo: "/src/assets/logo-certif.png",
+        logo: null,
         certificates: cetificateJavaScript.map(
           (num) =>
             `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
@@ -38,7 +38,7 @@ class CertificateManager {
       },
       uxui: {
         name: "UX/UI",
-        logo: "/src/assets/logo-certif.png",
+        logo: null,
         certificates: cetificateUXUI.map(
           (num) =>
             `https://platzi.com/MigueEc/curso/${num}-course/diploma-og/og.jpeg`,
@@ -72,7 +72,9 @@ class CertificateManager {
         return [];
       }
 
-      // Devolver las URLs sin validación (más rápido)
+      console.log(`Cargando ${category.certificates.length} certificados para la categoría: ${categoryId}`);
+      
+      // Devolver las URLs sin validación para mejorar velocidad de carga
       return category.certificates;
 
       // Si necesitas validación, descomenta la siguiente línea y comenta la anterior
@@ -152,8 +154,6 @@ class CertificateManager {
       };
 
       // Configuración para mejorar el rendimiento
-      img.crossOrigin = "anonymous";
-      img.referrerPolicy = "no-referrer";
       img.loading = "lazy";
 
       // Iniciar carga

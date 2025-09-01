@@ -1,7 +1,6 @@
 ---
 import { getCategories, getCertificatesByCategory } from "../utils/putCertificados";
 import CategoryCard from "./CategoryCard.astro";
-import CertificateGrid from "./CertificateGrid.astro";
 
 // Obtener categorías disponibles
 const categories = getCategories();
@@ -45,12 +44,9 @@ const categories = getCategories();
 </main>
 
 <script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const { initializeCertificateLogic } = await import('../utils/certificate-loader.js');
-      initializeCertificateLogic();
-    } catch (error) {
-      console.error('Error loading certificate logic:', error);
-    }
+  import { initializeCertificateLogic } from '../utils/certificate-loader.js';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeCertificateLogic();
   });
 </script>

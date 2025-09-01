@@ -59,20 +59,4 @@ const { certificates, categoryName, isLoading = false } = Astro.props;
   )}
 </section>
 
-<script>
-  // Script para manejar la animación de entrada
-  document.addEventListener('DOMContentLoaded', () => {
-    const certificateDisplay = document.getElementById('certificate-display');
-    
-    if (certificateDisplay) {
-      // Agregar clase para animación de entrada
-      certificateDisplay.classList.add('opacity-0');
-      
-      // Animar entrada después de un pequeño delay
-      setTimeout(() => {
-        certificateDisplay.classList.remove('opacity-0');
-        certificateDisplay.classList.add('opacity-100');
-      }, 500);
-    }
-  });
-</script> 
+<!-- Script removido para evitar conflicto con certificate-loader.js --> 
